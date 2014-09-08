@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+  <title>Colors</title>
+  <meta name="description" content="Full page color sweep.">
+  <link rel="shortcut icon" href="favicon.ico">
+  <style>
+    html, body {
+      width:100%;
+      height:100%;
+    }
+    #home {
+      position:absolute;
+      right:10px;
+      bottom:10px;
+      font-size:2em;
+      color:#FFF;
+    }
+  </style>
+  <script src="sweep.min.js"></script>
+</head>
+<body>
+  <a href="http://www.falk-wallace.com"><span id="home">&#8962;</span></a>
+  <script>
+    var body = document.body;
+    function loop () {
+      sweep(body, ['background-color'], 'hsl(0, 1, 0.5)', 'hsl(359, 1, 0.5)', {
+        callback: loop,
+        direction: 1,
+        duration: 10000,
+        space: 'HUSL'
+      });
+    }
+    loop();
+  </script>
+</body>
+</html>
+
+
