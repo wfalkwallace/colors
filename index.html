@@ -32,8 +32,7 @@
     }
     loop();
 
-    var el = document.getElementsByTagName('body')[0];
-    el.addEventListener('click', function () {
+    body.addEventListener('click', function () {
       alert(this.style.backgroundColor);
     }, false);
 
