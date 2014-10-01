@@ -20,6 +20,10 @@
 </head>
 <body>
   <a href="http://www.falk-wallace.com"><span id="home">&#8962;</span></a>
+  <div class="modal hidden" id="hex-modal">
+    <h1 id="hex-code"></h1>
+    <span class="close" id="hex-close">x</span>
+  </div>
   <script>
     var body = document.body;
     function loop () {
@@ -33,19 +37,23 @@
     loop();
 
     body.addEventListener('click', function () {
-      alert(this.style.backgroundColor);
+      var modal = document.getElementById('hex-modal');
+      var color = document.getElementById('hex-code');
+      modal.removeClass('hidden');
+      color.text('#' + this.style.backgroundColor);
     }, false);
-
+    document.getElementById('hex-close').addEventListener('click', function () {
+      var modal = document.getElementById('hex-modal');
+      modal.add('hidden');
+    }, false);
   </script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
   ga('create', 'UA-21231537-3', 'auto');
   ga('send', 'pageview');
-
 </script>
 </body>
 </html>
