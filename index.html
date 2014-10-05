@@ -16,26 +16,43 @@
       color:#FFF;
     }
   </style>
+
+  <!-- libraries -->
   <script src="sweep.min.js"></script>
+  <script src="sweet-alert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="sweet-alert.css">
+  <!-- /libraries -->
+
 </head>
 <body>
   <a href="http://www.falk-wallace.com"><span id="home">&#8962;</span></a>
   <script>
-    var body = document.body;
-    function loop () {
-      sweep(body, ['background-color'], 'hsl(0, 1, 0.5)', 'hsl(359, 1, 0.5)', {
-        callback: loop,
-        direction: 1,
-        duration: 10000,
-        space: 'HUSL'
+    window.onload = function ()
+    {
+      var body = document.body;
+      function loop () {
+        sweep(body, ['background-color'], 'hsl(0, 1, 0.5)', 'hsl(359, 1, 0.5)', {
+          callback: loop,
+          direction: 1,
+          duration: 10000,
+          space: 'HUSL'
+        });
+      }
+      loop();
+
+      body.addEventListener('click', function () {
+        var color = this.style.backgroundColor;
+        var rgb = color.match(/rgb\((\d+), (\d+), (\d+)\)/);
+        var hexValue = rgb[3] | (rgb[2] << 8) | (rgb[1] << 16);
+        swal({
+          title:'#' + hexValue.toString(16),
+        });
+        var swatch = document.createElement("div");
+        swatch.style.cssText = "background-color: " + color + "; width: 100%; height: 50px;";
+        var swalTitle = document.querySelector('.sweet-alert h2');
+        swalTitle.parentNode.insertBefore(swatch, swalTitle);
       });
     }
-    loop();
-
-    body.addEventListener('click', function () {
-      alert(this.style.backgroundColor);
-    }, false);
-
   </script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
