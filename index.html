@@ -26,10 +26,6 @@
 </head>
 <body>
   <a href="http://www.falk-wallace.com"><span id="home">&#8962;</span></a>
-  <div class="modal hidden" id="hex-modal">
-    <h1 id="hex-code"></h1>
-    <span class="close" id="hex-close">x</span>
-  </div>
   <script>
     window.onload = function ()
     {
@@ -47,14 +43,20 @@
       body.addEventListener('click', function () {
         var color = this.style.backgroundColor;
         var rgb = color.match(/rgb\((\d+), (\d+), (\d+)\)/);
-        var hexValue = rgb[3] | (rgb[2] << 8) | (rgb[1] << 16);
+        var hexValue = parseInt(rgb[3]) | (parseInt(rgb[2]) << 8) | (parseInt(rgb[1]) << 16);
+        var hexString = '00' + hexValue.toString(16)
         swal({
-          title:'#' + hexValue.toString(16),
+          title:'#' + hexString.slice(-6),
+          showConfirmButton: false,
         });
-        var swatch = document.createElement("div");
+        if (!document.querySelector('.swatch')) {
+          var swatch = document.createElement("div");
+          swatch.className = "swatch";
+          var swalTitle = document.querySelector('.sweet-alert h2');
+          swalTitle.parentNode.insertBefore(swatch, swalTitle);
+        }
+        var swatch = document.querySelector('.swatch');
         swatch.style.cssText = "background-color: " + color + "; width: 100%; height: 50px;";
-        var swalTitle = document.querySelector('.sweet-alert h2');
-        swalTitle.parentNode.insertBefore(swatch, swalTitle);
       });
     }
   </script>
